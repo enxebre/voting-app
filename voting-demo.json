@@ -1,0 +1,74 @@
+{
+  "id": "voting-demo",
+  "apps": [
+    {
+      "id": "redis",
+      "container": {
+        "type": "DOCKER",
+        "docker": {
+          "image": "redis",
+          "network": "BRIDGE",
+          "portMappings": [{
+            "containerPort": 6379,
+            "hostPort": 0,
+            "protocol": "tcp"
+          }]
+        }
+      },
+      "env": {
+        "SERVICE_NAME": "redis",
+        "SERVICE_TAGS": "voting-demo"
+      },
+      "cpus": 0.2,
+      "mem": 128.0,
+      "instances": 1,
+      "healthChecks": [{
+        "path": "/",
+        "portIndex": 0,
+        "protocol": "TCP",
+        "gracePeriodSeconds": 30,
+        "intervalSeconds": 10,
+        "timeoutSeconds": 20,
+        "maxConsecutiveFailures": 3
+      }]
+    },
+    {
+      "id": "nodejs",
+      "container": {
+        "type": "DOCKER",
+        "docker": {
+          "image": "capgemini/voting-demo",
+          "network": "BRIDGE",
+          "forcePullImage": true,
+          "portMappings": [{
+            "containerPort": 80,
+            "hostPort": 0,
+            "protocol": "tcp"
+          }]
+        }
+      },
+      "env": {
+        "SERVICE_NAME": "voting-demo-nodejs",
+        "SERVICE_TAGS": "voting-demo",
+        "REDIS_HOST": "redis"
+      },
+      "cpus": 0.2,
+      "mem": 512.0,
+      "instances": 6,
+      "healthChecks": [{
+        "path": "/",
+        "portIndex": 0,
+        "protocol": "HTTP",
+        "gracePeriodSeconds": 30,
+        "intervalSeconds": 10,
+        "timeoutSeconds": 20,
+        "maxConsecutiveFailures": 3
+      }],
+      "upgradeStrategy": {
+        "minimumHealthCapacity": 0.3,
+        "maximumOverCapacity": 1
+      },
+      "dependencies": ["/voting-demo/redis"]
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: voting-app-prod-demo
+spec:
+  rules:
+  - host: voting-app.external.kuwit.rocks
+    http:
+      paths:
+      - backend:
+          serviceName: voting-app
+          servicePort: 80

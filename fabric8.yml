@@ -1,0 +1,13 @@
+---
+buildName: "voting-app"
+codeReview: false
+links:
+  Git: "http://gogs.default.kuwit.rocks/gogsadmin/voting-app"
+  Job: "http://jenkins.default.kuwit.rocks/job/voting-app"
+  Production: "http://10.3.0.228:80/kubernetes/pods?namespace=default-prod"
+  Staging: "http://10.3.0.228:80/kubernetes/pods?namespace=default-staging"
+  Testing: "http://10.3.0.228:80/kubernetes/pods?namespace=default-testing"
+environments:
+  Testing: "default-testing"
+  Staging: "default-staging"
+  Production: "default-prod"

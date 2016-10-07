@@ -1,0 +1,12 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: voting-app-external-stagging-demo
+spec:
+  rules:
+  - host: voting-app.default-staging.external.kuwit.rocks
+    http:
+      paths:
+      - backend:
+          serviceName: voting-app
+          servicePort: 80

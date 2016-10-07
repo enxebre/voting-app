@@ -1,0 +1,11 @@
+version: '2'
+
+services:
+  redis:
+    image: redis
+  voting-demo:
+    build: .
+    volumes:
+      - ./:/app
+    ports:
+      - "5001:80"

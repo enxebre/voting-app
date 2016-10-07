@@ -1,0 +1,27 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: redis
+  labels:
+    group: cluster-services
+    project: redis
+    provider: redis
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      group: cluster-services
+      project: redis
+      provider: redis
+  template:
+    metadata:
+      labels:
+        group: cluster-services
+        project: redis
+        provider: redis
+    spec:
+      containers:
+      - name: redis
+        image: redis
+        ports:
+        - containerPort: 6379

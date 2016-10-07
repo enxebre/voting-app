@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html ng-app="catsvsdogs">
+  <head>
+    <meta charset="utf-8">
+    <title>Beatles vs Stones -- Result</title>
+    <base href="/index.html">
+    <meta name = "viewport" content = "width=device-width, initial-scale = 1.0">
+    <meta name="keywords" content="docker-compose, docker, stack">
+    <meta name="author" content="Tutum dev team">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body ng-controller="statsCtrl" >
+     <div id="background-stats">
+       <div id="background-stats-1">
+       </div><!--
+      --><div id="background-stats-2">
+      </div>
+    </div>
+
+    <div id="content-container">
+      <div id="content-container-center">
+
+        <h3>{{option_a}} vs {{option_b}}!</h3>
+        <form id="choice" name='form'>
+          <button id="a" type="submit" name="vote" class="a" value="a" ng-click="sendVote('a')">{{option_a}}</button>
+          <button id="b" type="submit" name="vote" class="b" value="b" ng-click="sendVote('b')">{{option_b}}</button>
+        </form>
+        <div id="tip">
+          (Tip: Vote as many times as you like!)
+        </div>
+
+        <div id="choice">
+          <div class="choice cats">
+            <div class="label">{{option_a}}</div>
+            <div class="stat">{{aPercent | number:1}}%</div>
+          </div>
+          <div class="divider"></div>
+          <div class="choice dogs">
+            <div class="label">{{option_b}}</div>
+            <div class="stat">{{bPercent | number:1}}%</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="result">
+      {{total}} votes
+    </div>
+    <script src="socket.io.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
